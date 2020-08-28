@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/TrendyolCollectionShare/precache-manifest.db16ff5c2fa02a9785474b3582e10d07.js"
+  "/TrendyolCollectionShare/precache-manifest.d75d970196e0f0c970ff2321f3a214ee.js"
 );
 
 self.addEventListener('message', (event) => {
