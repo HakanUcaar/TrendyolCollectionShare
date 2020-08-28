@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "135dd2e83108c98423e9ea5ba4312a62",
+    "revision": "935df0ea8a5641108be78f5669d0960f",
     "url": "/TrendyolCollectionShare/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/TrendyolCollectionShare/static/css/2.57ddf7ad.chunk.css"
   },
   {
-    "revision": "e42594976afbee88697d",
+    "revision": "65091acf694e4abc80b8",
     "url": "/TrendyolCollectionShare/static/css/main.5ecd60fb.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/TrendyolCollectionShare/static/js/2.864a3c0c.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "e42594976afbee88697d",
-    "url": "/TrendyolCollectionShare/static/js/main.09ed39ff.chunk.js"
+    "revision": "65091acf694e4abc80b8",
+    "url": "/TrendyolCollectionShare/static/js/main.1a322c57.chunk.js"
   },
   {
     "revision": "3ec845d56895cc689e0a",
