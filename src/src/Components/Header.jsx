@@ -111,7 +111,7 @@ export class Header extends Component {
         }
         else
         if(this.props.Link === ""){
-            this.setState({GeneratedLink:true,CollectionLink:window.location.origin+"/"+window.location.pathname+"/"+this.props.MyCollection.collectionId});
+            this.setState({GeneratedLink:true,CollectionLink:window.location.href+"/"+this.props.MyCollection.collectionId});
             this.props.saveCollection();
             this.props.loadedCollection();
         }
