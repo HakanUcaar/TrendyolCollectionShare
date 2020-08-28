@@ -7,6 +7,7 @@ Frontend kısmında Reactjs kullanılmıştır.
 Proje Github pages ile yayınlanmıştır. 
 
 Koleksiyon oluturmak için link : https://hakanucaar.github.io/TrendyolCollectionShare/
+
 Örnek bir koleksiyon linki : https://hakanucaar.github.io/TrendyolCollectionShare/#/168d8872-64f8-4208-98af-3fddcf546fa5
 
 # Yeni Koleksiyon Oluşturma
