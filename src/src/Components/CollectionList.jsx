@@ -2,21 +2,12 @@ import React, { Component } from 'react';
 import { withStyles,createMuiTheme } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import Container from '@material-ui/core/Container';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import SearchIcon from '@material-ui/icons/Search';
-import Detail from './Detail';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import { selectedTodo } from "../Redux/ReduxActions";
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -28,10 +19,9 @@ import AccordionActions from '@material-ui/core/AccordionActions';
 import Divider from '@material-ui/core/Divider';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import Paper from '@material-ui/core/Paper';
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
+import { withSnackbar } from 'notistack';
 
 import ItemImagesModel from '../Models/ItemImagesModel';
 import CollectionItemModel from '../Models/CollectionItemModel';
@@ -129,100 +119,57 @@ export class CollectionList extends Component {
     }; 
 
     handleAddCollectionItem=async(e)=>{ 
-        const herokuHttps = "https://cors-anywhere.herokuapp.com/";
-        
-        // var request = require("request");
-        // request(herokuHttps+this.state.Link, function (error, response, body) {
-        //     if (!error) {
-        //         console.log(response);
-        //     } else {
-        //         console.log(error);
-        //     }
-        // });
-
-        this.props.loadingCollection();
-        await fetch(herokuHttps+this.state.Link)
-        .then((response)=>{
-            return response.text()
-        })
-        .then((html)=>{
-            var parser = new DOMParser();
-            var doc = parser.parseFromString(html, "text/html");   
-
-            let ScriptsArray =Array.from(doc.getElementsByTagName("script"));
-            let JSONData = ScriptsArray.find(x=>x.innerText.indexOf("window.__PRODUCT_DETAIL_APP_INITIAL_STATE__")!==-1).innerText.trim().substring("window.__PRODUCT_DETAIL_APP_INITIAL_STATE__ =".length);
-            JSONData = JSONData.substring(0,JSONData.length-1);
-            let NewTrendyolModel = new TrendyolModel();
-            console.log(Object.assign(NewTrendyolModel,JSON.parse(JSONData)));
-            
-            let TempCollection = {...this.props.MyCollection};
-            let NewItem = new CollectionItemModel();
-
-            NewItem.itemName = NewTrendyolModel.product.productCode;
-            NewItem.itemDescription = NewTrendyolModel.product.name;
-            NewItem.url = this.state.Link;
-            NewItem.price = NewTrendyolModel.product.price.sellingPrice.value;
-            NewItem.gender = NewTrendyolModel.product.gender.name;
-            NewItem.favoriteCount = NewTrendyolModel.product.favoriteCount;
-            NewItem.totalRatingCount = NewTrendyolModel.product.ratingScore.totalRatingCount;
-            NewItem.totalCommentCount = NewTrendyolModel.product.ratingScore.totalCommentCount;
-            NewItem.averageRating = NewTrendyolModel.product.ratingScore.averageRating;
-            NewItem.merchantName = NewTrendyolModel.product.merchant.name;
-            NewItem.merchantOfficialName = NewTrendyolModel.product.merchant.officialName;
-
-            NewTrendyolModel.product.images.map((data)=>{
-                let NewImage = new ItemImagesModel();
-                NewItem.collectionId = TempCollection.CollectionId;
-                NewImage.itemId = NewItem.ItemId;
-                NewImage.url = "https://cdn.dsmcdn.com/"+data; 
-                NewImage.htmlContent = "";
-                NewItem.itemImages.push(NewImage);
+        try {
+            this.props.loadingCollection();
+            const herokuHttps = "https://cors-anywhere.herokuapp.com/";       
+            await fetch(herokuHttps+this.state.Link)
+            .then((response)=>{
+                return response.text()
             })
-
-            TempCollection.collectionItem.push(NewItem);
-            this.props.updateCollection(TempCollection);  
-            this.setState({Link:""}); 
-        })
-        this.props.loadedCollection();
-        
-         
-        // this.getHTML(this.state.Link,(response)=>{    
-        //     console.log(response);       
-        //     let ScriptsArray =Array.from(response.getElementsByTagName("script"));
-        //     let JSONData = ScriptsArray.find(x=>x.innerText.indexOf("window.__PRODUCT_DETAIL_APP_INITIAL_STATE__")!==-1).innerText.trim().substring("window.__PRODUCT_DETAIL_APP_INITIAL_STATE__ =".length);
-        //     JSONData = JSONData.substring(0,JSONData.length-1);
-        //     let NewTrendyolModel = new TrendyolModel();
-        //     console.log(Object.assign(NewTrendyolModel,JSON.parse(JSONData)));
+            .then((html)=>{
+                var parser = new DOMParser();
+                var doc = parser.parseFromString(html, "text/html");   
+    
+                let ScriptsArray =Array.from(doc.getElementsByTagName("script"));
+                let JSONData = ScriptsArray.find(x=>x.innerText.indexOf("window.__PRODUCT_DETAIL_APP_INITIAL_STATE__")!==-1).innerText.trim().substring("window.__PRODUCT_DETAIL_APP_INITIAL_STATE__ =".length);
+                JSONData = JSONData.substring(0,JSONData.length-1);
+                let NewTrendyolModel = new TrendyolModel();
+                console.log(Object.assign(NewTrendyolModel,JSON.parse(JSONData)));
+                
+                let TempCollection = {...this.props.MyCollection};
+                let NewItem = new CollectionItemModel();
+    
+                NewItem.itemName = NewTrendyolModel.product.productCode;
+                NewItem.itemDescription = NewTrendyolModel.product.name;
+                NewItem.url = this.state.Link;
+                NewItem.price = NewTrendyolModel.product.price.sellingPrice.value;
+                NewItem.gender = NewTrendyolModel.product.gender.name;
+                NewItem.favoriteCount = NewTrendyolModel.product.favoriteCount;
+                NewItem.totalRatingCount = NewTrendyolModel.product.ratingScore.totalRatingCount;
+                NewItem.totalCommentCount = NewTrendyolModel.product.ratingScore.totalCommentCount;
+                NewItem.averageRating = NewTrendyolModel.product.ratingScore.averageRating;
+                NewItem.merchantName = NewTrendyolModel.product.merchant.name;
+                NewItem.merchantOfficialName = NewTrendyolModel.product.merchant.officialName;
+    
+                NewTrendyolModel.product.images.map((data)=>{
+                    let NewImage = new ItemImagesModel();
+                    NewItem.collectionId = TempCollection.CollectionId;
+                    NewImage.itemId = NewItem.ItemId;
+                    NewImage.url = "https://cdn.dsmcdn.com/"+data; 
+                    NewImage.htmlContent = "";
+                    NewItem.itemImages.push(NewImage);
+                })
+    
+                TempCollection.collectionItem.push(NewItem);
+                this.props.updateCollection(TempCollection);  
+                this.setState({Link:""}); 
+            })
+        } catch (error) {
             
-        //     let TempCollection = {...this.props.MyCollection};
-        //     let NewItem = new CollectionItemModel();
-
-        //     NewItem.itemName = NewTrendyolModel.product.productCode;
-        //     NewItem.itemDescription = NewTrendyolModel.product.name;
-        //     NewItem.url = this.state.Link;
-        //     NewItem.price = NewTrendyolModel.product.price.sellingPrice.value;
-        //     NewItem.gender = NewTrendyolModel.product.gender.name;
-        //     NewItem.favoriteCount = NewTrendyolModel.product.favoriteCount;
-        //     NewItem.totalRatingCount = NewTrendyolModel.product.ratingScore.totalRatingCount;
-        //     NewItem.totalCommentCount = NewTrendyolModel.product.ratingScore.totalCommentCount;
-        //     NewItem.averageRating = NewTrendyolModel.product.ratingScore.averageRating;
-        //     NewItem.merchantName = NewTrendyolModel.product.merchant.name;
-        //     NewItem.merchantOfficialName = NewTrendyolModel.product.merchant.officialName;
-
-        //     NewTrendyolModel.product.images.map((data)=>{
-        //         let NewImage = new ItemImagesModel();
-        //         NewItem.collectionId = TempCollection.CollectionId;
-        //         NewImage.itemId = NewItem.ItemId;
-        //         NewImage.url = "https://cdn.dsmcdn.com/"+data; 
-        //         NewImage.htmlContent = "";
-        //         NewItem.itemImages.push(NewImage);
-        //     })
-
-        //     TempCollection.collectionItem.push(NewItem);
-        //     this.props.updateCollection(TempCollection);  
-        //     this.setState({Link:""}); 
-        // });                      
-        
+        }
+        finally{
+            this.props.loadedCollection();  
+        }                      
     }
 
     handleDeleteCollectionItem=(e,p)=>{
@@ -240,16 +187,6 @@ export class CollectionList extends Component {
         e.preventDefault();
         window.open(p);
     }
-
-    handleOpenTodo=(e,p)=>{
-        e.preventDefault();
-        // let FilteredTodoList = this.props.TodoLists.Todolists.find((value)=>{return value.Id.match(p)});
-        // let TempTodos =Object.assign(new TodoListModel(),FilteredTodoList);
-        // if(TempTodos != null || TempTodos.length > 0){
-        //     this.props.selectedTodo(TempTodos);
-        // }
-        // this.setState({DetailOpen:true});
-    } 
 
     render() {
         const {classes} = this.props;
@@ -370,7 +307,6 @@ export class CollectionList extends Component {
                             : ""
                         }
                     </List>
-                    <Detail open={this.state.DetailOpen} handleClose={this.handleDetailClose}></Detail>
                 </Container>
             </div>
         )

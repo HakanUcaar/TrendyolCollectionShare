@@ -18,8 +18,8 @@ const theme = createMuiTheme();
 const useStyles = {
     root:{
         flexGrow: "1",
-        maxHeight:"250px",
-        minHeight:"250px"
+        maxHeight:"270px",
+        minHeight:"270px"
     },
     date :{
         position :"absolute",
@@ -73,15 +73,15 @@ const useStyles = {
         margin: "auto"
     }
 };
-theme.typography.h2 = {
-    fontSize: '3.75rem',
-    '@media (min-width:600px)': {
-        fontSize: '2.5rem',
-    },
-    [theme.breakpoints.up('md')]: {
-        fontSize: '3.75rem',
-    },
-};
+// theme.typography.h2 = {
+//     fontSize: '3.75rem',
+//     '@media (min-width:600px)': {
+//         fontSize: '2.5rem',
+//     },
+//     [theme.breakpoints.up('md')]: {
+//         fontSize: '3.75rem',
+//     },
+// };
 
 export class Header extends Component {
     constructor(){
@@ -111,7 +111,7 @@ export class Header extends Component {
         }
         else
         if(this.props.Link === ""){
-            this.setState({GeneratedLink:true,CollectionLink:window.location.href+"/"+this.props.MyCollection.collectionId});
+            this.setState({GeneratedLink:true,CollectionLink:window.location.origin+"/"+this.props.MyCollection.collectionId});
             this.props.saveCollection();
             this.props.loadedCollection();
         }
@@ -156,6 +156,9 @@ export class Header extends Component {
                     <Typography className={classes.collection} variant="h2" component="h1">
                         KOLEKSİYONUN
                     </Typography>   
+                    <Typography className={classes.collection} variant="h8" component="h6">
+                        Bu projedeki hiç bir veri ticari bir amaç için kullanılmamaktadır. Tamamen açık kaynak olarak geliştirilmiştir.
+                    </Typography>  
                 </div>  
                 {
                     <Fab className={classes.fab} color="primary" aria-label="add">

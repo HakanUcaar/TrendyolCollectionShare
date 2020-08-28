@@ -5,12 +5,9 @@ import {createMuiTheme,responsiveFontSizes } from "@material-ui/core";
 import Main from './Components/Main';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Switch from '@material-ui/core/Switch';
-import { SnackbarProvider } from 'notistack';
 
+import { withSnackbar } from 'notistack';
 import { readCollection,loadingCollection,loadedCollection } from "./Redux/ReduxActions";
-import TrendyolModel from './TrenyolModels/TrendyolModel';
-import ItemImagesModel from './Models/ItemImagesModel';
-import CollectionItemModel from './Models/CollectionItemModel';
 
 const CollectionServ = require('./Services/CollectionService');
 
@@ -28,7 +25,7 @@ export class App extends Component {
     }
   }
 
-  toggleDarkTheme = () => {
+   toggleDarkTheme = () => {
     let newPaletteType = this.state.theme.palette.type === "light" ? "dark" : "light";
     this.setState({
       theme:{
@@ -43,40 +40,28 @@ export class App extends Component {
     this.toggleDarkTheme()
     this.setState({switchCheck:event.target.checked});
   };
-  
-  getHTML = ( url, callback ) => {
-
-    const herokuHttps = "https://cors-anywhere.herokuapp.com/";
-    // Feature detection
-    if ( !window.XMLHttpRequest ) return;
-
-    // Create new request
-    var xhr = new XMLHttpRequest();
-
-    // Setup callback
-    xhr.onload = function() {
-        if ( callback && typeof( callback ) === 'function' ) {
-            callback( this.responseXML );
-        }
-    }
-
-    // Get the HTML
-    xhr.open( 'GET',herokuHttps+ url );
-    xhr.responseType = 'document';
-    xhr.send();
-
-  };  
 
   async componentDidMount(){
-    if(this.props.collectionId !== undefined && this.props.collectionId !== "")
-    {                  
-      let data = await CollectionServ.getCollection(this.props.collectionId);
-      if(data){
-        console.log(data);
-        this.props.readCollection(data);  
-      }     
-    }  
-    this.props.loadedCollection();
+    try {
+      console.log(window.location);
+      this.props.loadingCollection();     
+      if(this.props.collectionId !== undefined && this.props.collectionId !== "")
+      {             
+        
+        let data = await CollectionServ.getCollection(this.props.collectionId);
+        if(data){
+          console.log(data);
+          this.props.readCollection(data);  
+        }     
+      }  
+    } catch (error) {
+      this.props.enqueueSnackbar("Veri bulunumadı",{ 
+        variant: 'error',
+      });
+    }
+    finally{
+      this.props.loadedCollection();
+    }    
   }
   
   render() {
@@ -86,19 +71,12 @@ export class App extends Component {
 
     return (
       <ThemeProvider theme={theme}>
-        <SnackbarProvider
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
-          }}
-        >
-          <CssBaseline/>
-          <Switch
-            checked={this.state.switchCheck}
-            onChange={this.handleSwitchChange}
-          />          
-          <Main/>  
-        </SnackbarProvider>         
+        <CssBaseline/>
+        <Switch
+          checked={this.state.switchCheck}
+          onChange={this.handleSwitchChange}
+        />          
+        <Main/>     
       </ThemeProvider> 
     )
   }
@@ -121,4 +99,5 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+const AppSnack = withSnackbar(App);
+export default connect(mapStateToProps, mapDispatchToProps)(AppSnack)

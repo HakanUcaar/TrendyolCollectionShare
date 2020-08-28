@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Header from './Header';
 import Container from '@material-ui/core/Container';
 
-import CollectionList from './CollectionList';
 import CollectionList2 from './CollectionList2';
 
 const useStyles = {
@@ -25,9 +24,6 @@ const useStyles = {
         minHeight: "95vh"
     }
 };
-
-// <CollectionList handleOpen={this.handleDetailOpen}></CollectionList> 
-
 
 export class Main extends Component {
     render() {

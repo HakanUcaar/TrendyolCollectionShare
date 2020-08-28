@@ -169,7 +169,6 @@ export class CollectionList2 extends Component {
     }
 
     handleAddCollectionItem=async(e)=>{ 
-        
         this.props.loadingCollection();
         try {
             const herokuHttps = "https://cors-anywhere.herokuapp.com/";

@@ -5,7 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from "react-redux";
 import store from "./Redux/ReduxStore";
-import { BrowserRouter, Route ,Switch, HashRouter } from 'react-router-dom'
+import { Route ,Switch, HashRouter,Redirect } from 'react-router-dom';
+import { SnackbarProvider } from 'notistack';
 
 const GetCollection = ({ match }) => {
   return <App collectionId={match.params.collectionId}></App> 
@@ -14,12 +15,21 @@ window.store = store;
 
 ReactDOM.render(
   <Provider store={store}> 
-    <HashRouter basename={process.env.PUBLIC_URL}>
-      <Switch>
-        <Route exact path="/" component={App} />
-        <Route exact path="/:collectionId" component={GetCollection} />
-      </Switch>
-    </HashRouter>        
+    <SnackbarProvider
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'center',
+      }}
+    >
+      <HashRouter basename={process.env.PUBLIC_URL}>
+        <Switch>
+          <Route exact path="/" component={App} />
+          <Route exact path="/:collectionId" component={GetCollection}/>
+          <Route path = "*" component={App}/>
+          <Redirect to="/" />
+        </Switch>
+      </HashRouter>   
+    </SnackbarProvider>        
   </Provider>
   , document.getElementById('root')
 );
