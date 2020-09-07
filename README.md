@@ -2,7 +2,7 @@
 Trenyol koleksiyonu oluşturma ve paylaşma uygulamasıdır.
 
 - Projenin backend kısmında .NetCore webapi kullanılmıştır. Servis uygulaması Heroku aracılığı ile publish edilmiştir. 
-- Veritabanı olarak Herokunun Amazon üzerinden ücretsiz verdiği postgresql kullanılmıştır.
+- Veritabanı olarak Heroku Amazon üzerinden ücretsiz verdiği Postgresql kullanılmıştır.
 - Frontend kısmında Reactjs kullanılmıştır.
 - Proje Github pages ile yayınlanmıştır. 
 
