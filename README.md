@@ -6,7 +6,7 @@ Trenyol koleksiyonu oluşturma ve paylaşma uygulamasıdır.
 - Frontend kısmında Reactjs kullanılmıştır.
 - Proje Github pages ile yayınlanmıştır. 
 
-Koleksiyon oluturmak için : https://hakanucaar.github.io/TrendyolCollectionShare/
+Koleksiyon oluşturmak için : https://hakanucaar.github.io/TrendyolCollectionShare/
 
 Örnek bir koleksiyon : https://hakanucaar.github.io/TrendyolCollectionShare/#/168d8872-64f8-4208-98af-3fddcf546fa5
 
