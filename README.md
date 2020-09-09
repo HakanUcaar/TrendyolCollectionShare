@@ -15,3 +15,6 @@ Koleksiyon oluşturmak için : https://hakanucaar.github.io/TrendyolCollectionSh
 
 # Linki Girerek Varolan Koleksiyonu Açma
 ![TrendyolCollectionShare2.gif](https://github.com/HakanUcaar/TrendyolCollectionShare/blob/master/img/TrendyolCollectionShare2.gif)
+
+# Karanlık Tema Desteği
+![TrendyolCollectionShare3.gif](https://github.com/HakanUcaar/TrendyolCollectionShare/blob/master/img/TrendyolCollectionShare3.gif)
