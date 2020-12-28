@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/TrendyolCollectionShare/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/TrendyolCollectionShare/static/js/main.b229250f.chunk.js",
-    "main.js.map": "/TrendyolCollectionShare/static/js/main.b229250f.chunk.js.map",
+    "main.js": "/TrendyolCollectionShare/static/js/main.478e485c.chunk.js",
+    "main.js.map": "/TrendyolCollectionShare/static/js/main.478e485c.chunk.js.map",
     "runtime-main.js": "/TrendyolCollectionShare/static/js/runtime-main.ad78fe7d.js",
     "runtime-main.js.map": "/TrendyolCollectionShare/static/js/runtime-main.ad78fe7d.js.map",
     "static/css/2.57ddf7ad.chunk.css": "/TrendyolCollectionShare/static/css/2.57ddf7ad.chunk.css",
     "static/js/2.3b0ebfee.chunk.js": "/TrendyolCollectionShare/static/js/2.3b0ebfee.chunk.js",
     "static/js/2.3b0ebfee.chunk.js.map": "/TrendyolCollectionShare/static/js/2.3b0ebfee.chunk.js.map",
     "index.html": "/TrendyolCollectionShare/index.html",
-    "precache-manifest.0f093105c24197df25808109c5d78d5b.js": "/TrendyolCollectionShare/precache-manifest.0f093105c24197df25808109c5d78d5b.js",
+    "precache-manifest.bc50229af5d1f1dd309fb62ef55dba54.js": "/TrendyolCollectionShare/precache-manifest.bc50229af5d1f1dd309fb62ef55dba54.js",
     "service-worker.js": "/TrendyolCollectionShare/service-worker.js",
     "static/css/2.57ddf7ad.chunk.css.map": "/TrendyolCollectionShare/static/css/2.57ddf7ad.chunk.css.map",
     "static/css/main.5ecd60fb.chunk.css.map": "/TrendyolCollectionShare/static/css/main.5ecd60fb.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.57ddf7ad.chunk.css",
     "static/js/2.3b0ebfee.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.b229250f.chunk.js"
+    "static/js/main.478e485c.chunk.js"
   ]
 }
