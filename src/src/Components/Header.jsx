@@ -73,15 +73,6 @@ const useStyles = {
         margin: "auto"
     }
 };
-// theme.typography.h2 = {
-//     fontSize: '3.75rem',
-//     '@media (min-width:600px)': {
-//         fontSize: '2.5rem',
-//     },
-//     [theme.breakpoints.up('md')]: {
-//         fontSize: '3.75rem',
-//     },
-// };
 
 export class Header extends Component {
     constructor(){
@@ -89,6 +80,7 @@ export class Header extends Component {
 
         this.state={
             CollectionLink : "",
+            EmbedLink : "",
             GeneratedLink : false,
         }
     }
@@ -111,14 +103,14 @@ export class Header extends Component {
         }
         else
         if(this.props.Link === ""){
-            this.setState({GeneratedLink:true,CollectionLink:window.location.href + this.props.MyCollection.collectionId});
+            this.setState({GeneratedLink:true,CollectionLink:window.location.href + this.props.MyCollection.collectionId,EmbedLink:window.location.href + "embed/"+ this.props.MyCollection.collectionId});
             this.props.saveCollection();
             this.props.loadedCollection();
         }
         else{
             if(this.props.Link !== ""){
                 copy(window.location.href);
-                this.setState({GeneratedLink:true,CollectionLink:window.location.href});
+                this.setState({GeneratedLink:true,CollectionLink:window.location.href,EmbedLink:window.location.origin+ "/TrendyolCollectionShare#/embed/"+ this.props.MyCollection.collectionId});
             }
         }
     }
@@ -146,7 +138,9 @@ export class Header extends Component {
                             <DialogContentText gutterBottom>
                                 {this.state.CollectionLink}
                             </DialogContentText>  
-
+                            <DialogContentText gutterBottom>
+                                {this.state.EmbedLink}
+                            </DialogContentText>  
                             <QRCode className={classes.linkDialogQR} value={this.state.CollectionLink} />                                         
                         </div>
                     </DialogContent>

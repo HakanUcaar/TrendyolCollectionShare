@@ -1,5 +1,3 @@
-import CollectionModel from '../Models/CollectionModel';
-
 export async function getCollection (Request){
     let response = await fetch("https://trendyolcollectionshareapp.herokuapp.com/Collection/GetData",
     {
@@ -11,7 +9,6 @@ export async function getCollection (Request){
     });
     
     let data = await response.json();
-    // let NewModel = Object.assign(new CollectionModel(),data);
     return data;
 }
 
